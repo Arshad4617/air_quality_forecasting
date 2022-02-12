@@ -22,7 +22,6 @@ model = pickle.load(open('model.pkl', 'rb'))
 st.title('Air Quality Forecasting')
 
 col1, col2 = st.columns([2, 4])
-col1.subheader("Data Visualization")
 
 
 
@@ -42,7 +41,7 @@ def predict():
     pred_df = pd.DataFrame(prediction,columns = ['Prediction'])
     co2_data = pd.read_csv('Dataset.csv',index_col='Year', parse_dates=True)
     dd = pd.concat([co2_data.CO2,pred_df.Prediction],axis = 1)
-    col2.subheader("Emission of CO2 for next 10 Years")
+    col1.subheader("Emission of CO2 for next {} Years".format(years_input))
 
     return col1.dataframe(pred_df),col2.line_chart(dd)  # Same as st.write(df)
 
